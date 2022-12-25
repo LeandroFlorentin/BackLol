@@ -16,7 +16,7 @@ const mostrarPeleadores = async (req, res) => {
     if (Support === undefined) Support = null
     try {
         if (
-            pag === 1
+            parseInt(pag) === 1
             &&
             search === null
             &&
