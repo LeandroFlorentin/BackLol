@@ -6,17 +6,16 @@ const { Op } = require("sequelize")
 
 const mostrarPeleadores = async (req, res) => {
     let { pag, search, Tank, Mage, Assassin, Fighter, Marksman, Support } = req.query;
-    console.log(Tank)
-    if (search === "undefined") search = null
-    if (Tank === "undefined") Tank = null
-    if (Mage === "undefined") Mage = null
-    if (Assassin === "undefined") Assassin = null
-    if (Fighter === "undefined") Fighter = null
-    if (Marksman === "undefined") Marksman = null
-    if (Support === "undefined") Support = null
+    if (search === undefined) search = null
+    if (Tank === undefined) Tank = null
+    if (Mage === undefined) Mage = null
+    if (Assassin === undefined) Assassin = null
+    if (Fighter === undefined) Fighter = null
+    if (Marksman === undefined) Marksman = null
+    if (Support === undefined) Support = null
     try {
         if (
-            !search
+            search === null
             &&
             Tank === null
             &&
@@ -30,10 +29,10 @@ const mostrarPeleadores = async (req, res) => {
             &&
             Support === null
         ) {
-            console.log("aca")
             const peleadores = await Peleadores.findAll()
             const numeroPaginas = Math.ceil((peleadores.length) / 9)
-            const numero = parseInt(pag)
+            const numero = parseInt(pag || 1)
+            console.log(numero)
             if (!pag || pag === "1" || parseInt(pag) < 1) {
                 const diezPrimeros = peleadores.slice(0, 9)
                 res.status(200).json({ results: diezPrimeros, paginas: numeroPaginas })
@@ -75,7 +74,6 @@ const mostrarPeleadores = async (req, res) => {
             }
         }
         else {
-            console.log("aca3")
             const numero = parseInt(pag)
             const busqueda = [Tank, Mage, Assassin, Fighter, Marksman, Support].filter(ele => ele !== null)
             const filtro = await Peleadores.findAll({
