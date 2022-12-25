@@ -6,17 +6,18 @@ const { Op } = require("sequelize")
 
 const mostrarPeleadores = async (req, res) => {
     let { pag, search, Tank, Mage, Assassin, Fighter, Marksman, Support } = req.query;
-    if (pag === undefined) pag = 1
-    if (search === undefined) search = null
-    if (Tank === undefined) Tank = null
-    if (Mage === undefined) Mage = null
-    if (Assassin === undefined) Assassin = null
-    if (Fighter === undefined) Fighter = null
-    if (Marksman === undefined) Marksman = null
-    if (Support === undefined) Support = null
+    console.log(Tank)
+    if (pag === "undefined") pag = 1
+    if (search === "undefined") search = null
+    if (Tank === "undefined") Tank = null
+    if (Mage === "undefined") Mage = null
+    if (Assassin === "undefined") Assassin = null
+    if (Fighter === "undefined") Fighter = null
+    if (Marksman === "undefined") Marksman = null
+    if (Support === "undefined") Support = null
     try {
         if (
-            parseInt(pag) === 1
+            pag === 1
             &&
             search === null
             &&
@@ -32,6 +33,7 @@ const mostrarPeleadores = async (req, res) => {
             &&
             Support === null
         ) {
+            console.log("aca2")
             const peleadores = await Peleadores.findAll()
             const numeroPaginas = Math.ceil((peleadores.length) / 9)
             const numero = parseInt(pag)
@@ -52,6 +54,7 @@ const mostrarPeleadores = async (req, res) => {
             }
         }
         else if (search) {
+            console.log("aca3")
             const numero = parseInt(pag)
             const busqueda2 = [Tank, Mage, Assassin, Fighter, Marksman, Support].filter(ele => ele !== null)
             const busqueda = await Peleadores.findAll({
@@ -77,6 +80,7 @@ const mostrarPeleadores = async (req, res) => {
             }
         }
         else {
+            console.log("aca")
             const numero = parseInt(pag)
             const busqueda = [Tank, Mage, Assassin, Fighter, Marksman, Support].filter(ele => ele !== null)
             const filtro = await Peleadores.findAll({
