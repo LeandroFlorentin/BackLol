@@ -6,6 +6,7 @@ const { Op } = require("sequelize")
 
 const mostrarPeleadores = async (req, res) => {
     let { pag, search, Tank, Mage, Assassin, Fighter, Marksman, Support } = req.query;
+    if (pag === undefined) pag = 1
     if (search === undefined) search = null
     if (Tank === undefined) Tank = null
     if (Mage === undefined) Mage = null
@@ -15,6 +16,8 @@ const mostrarPeleadores = async (req, res) => {
     if (Support === undefined) Support = null
     try {
         if (
+            pag === 1
+            &&
             search === null
             &&
             Tank === null
@@ -31,7 +34,7 @@ const mostrarPeleadores = async (req, res) => {
         ) {
             const peleadores = await Peleadores.findAll()
             const numeroPaginas = Math.ceil((peleadores.length) / 9)
-            const numero = parseInt(pag || 1)
+            const numero = parseInt(pag)
             console.log(numero)
             if (!pag || pag === "1" || parseInt(pag) < 1) {
                 const diezPrimeros = peleadores.slice(0, 9)
