@@ -6,7 +6,7 @@ const {
 } = process.env
 const { traerGeneros, mostrarPersonajes } = require('./src/helper/personajes.js')
 
-const puerto = PORT || 3001
+const puerto = PORT || 3000
 
 conexion.sync({ force: true }).then(() => {
     servidor.listen(puerto, () => {
