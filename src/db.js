@@ -6,7 +6,7 @@ const {
 } = process.env
 const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize("postgres://db_videogames_user:nCpRwTXMd2G8Fkd8mVpLGtMLa6WGpyG9@dpg-ce8cge02i3mlmrfb55hg-a.oregon-postgres.render.com/db_videogames", {
+const sequelize = new Sequelize("ec2-18-228-232-214.sa-east-1.compute.amazonaws.com:3000", {
     logging: false,
     native: false,
     dialectOptions: {
