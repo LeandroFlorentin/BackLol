@@ -12,7 +12,7 @@ module.exports = {
         name: DataTypes.STRING,
         title: DataTypes.STRING,
         blurb: DataTypes.TEXT,
-        tags: DataTypes.ARRAY(DataTypes.STRING),
+        tags: DataTypes.TEXT,
         partype: DataTypes.STRING,
         imagen: DataTypes.TEXT
     }, {

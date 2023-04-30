@@ -33,28 +33,43 @@ const mostrarPeleadores = async (req, res) => {
             &&
             Support === null
         ) {
-            console.log("aca2")
             const peleadores = await Peleadores.findAll()
             const numeroPaginas = Math.ceil((peleadores.length) / 9)
             const numero = parseInt(pag)
-            console.log(numero)
             if (!pag || pag === "1" || parseInt(pag) < 1) {
-                const diezPrimeros = peleadores.slice(0, 9)
+                const diezPrimeros = peleadores.slice(0, 9).map(value => {
+                    let obj = {}
+                    for (let i in value) {
+                        if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                        else obj = { ...obj, [i]: value[i] }
+                    }
+                })
                 res.status(200).json({ results: diezPrimeros, paginas: numeroPaginas })
             }
             else {
                 if (numero >= numeroPaginas) {
-                    const diez = peleadores.slice(9 * (numeroPaginas - 1), 9 * numeroPaginas)
+                    const diez = peleadores.slice(9 * (numeroPaginas - 1), 9 * numeroPaginas).map(value => {
+                        let obj = {}
+                        for (let i in value) {
+                            if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                            else obj = { ...obj, [i]: value[i] }
+                        }
+                    })
                     res.status(200).json({ results: diez, paginas: numeroPaginas })
                 }
                 else {
-                    const diez = peleadores.slice(9 * (numero - 1), 9 * numero)
+                    const diez = peleadores.slice(9 * (numero - 1), 9 * numero).map(value => {
+                        let obj = {}
+                        for (let i in value) {
+                            if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                            else obj = { ...obj, [i]: value[i] }
+                        }
+                    })
                     res.status(200).json({ results: diez, paginas: numeroPaginas })
                 }
             }
         }
         else if (search) {
-            console.log("aca3")
             const numero = parseInt(pag)
             const busqueda2 = [Tank, Mage, Assassin, Fighter, Marksman, Support].filter(ele => ele !== null)
             const busqueda = await Peleadores.findAll({
@@ -65,22 +80,39 @@ const mostrarPeleadores = async (req, res) => {
             })
             const numeroPaginas = Math.ceil((busqueda.length) / 9)
             if (!pag || pag === "1" || parseInt(pag) < 1) {
-                const diezPrimeros = busqueda.slice(0, 9)
+                const diezPrimeros = busqueda.slice(0, 9).map(value => {
+                    let obj = {}
+                    for (let i in value) {
+                        if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                        else obj = { ...obj, [i]: value[i] }
+                    }
+                })
                 res.status(200).json({ results: diezPrimeros, paginas: numeroPaginas })
             }
             else {
                 if (numero >= numeroPaginas) {
-                    const diez = busqueda.slice(9 * (numeroPaginas - 1), 9 * numeroPaginas)
+                    const diez = busqueda.slice(9 * (numeroPaginas - 1), 9 * numeroPaginas).map(value => {
+                        let obj = {}
+                        for (let i in value) {
+                            if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                            else obj = { ...obj, [i]: value[i] }
+                        }
+                    })
                     res.status(200).json({ results: diez, paginas: numeroPaginas })
                 }
                 else {
-                    const diez = busqueda.slice(9 * (numero - 1), 9 * numero)
+                    const diez = busqueda.slice(9 * (numero - 1), 9 * numero).map(value => {
+                        let obj = {}
+                        for (let i in value) {
+                            if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                            else obj = { ...obj, [i]: value[i] }
+                        }
+                    })
                     res.status(200).json({ results: diez, paginas: numeroPaginas })
                 }
             }
         }
         else {
-            console.log("aca")
             const numero = parseInt(pag)
             const busqueda = [Tank, Mage, Assassin, Fighter, Marksman, Support].filter(ele => ele !== null)
             const filtro = await Peleadores.findAll({
@@ -90,16 +122,34 @@ const mostrarPeleadores = async (req, res) => {
             })
             const numeroPaginas = Math.ceil((filtro.length) / 9)
             if (!pag || pag === "1" || parseInt(pag) < 1) {
-                const diezPrimeros = filtro.slice(0, 9)
+                const diezPrimeros = filtro.slice(0, 9).map(value => {
+                    let obj = {}
+                    for (let i in value) {
+                        if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                        else obj = { ...obj, [i]: value[i] }
+                    }
+                })
                 res.status(200).json({ results: diezPrimeros, paginas: numeroPaginas })
             }
             else {
                 if (numero >= numeroPaginas) {
-                    const diez = filtro.slice(9 * (numeroPaginas - 1), 9 * numeroPaginas)
+                    const diez = filtro.slice(9 * (numeroPaginas - 1), 9 * numeroPaginas).map(value => {
+                        let obj = {}
+                        for (let i in value) {
+                            if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                            else obj = { ...obj, [i]: value[i] }
+                        }
+                    })
                     res.status(200).json({ results: diez, paginas: numeroPaginas })
                 }
                 else {
-                    const diez = filtro.slice(9 * (numero - 1), 9 * numero)
+                    const diez = filtro.slice(9 * (numero - 1), 9 * numero).map(value => {
+                        let obj = {}
+                        for (let i in value) {
+                            if ([i] === "tags") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                            else obj = { ...obj, [i]: value[i] }
+                        }
+                    })
                     res.status(200).json({ results: diez, paginas: numeroPaginas })
                 }
             }
@@ -111,10 +161,9 @@ const mostrarPeleadores = async (req, res) => {
 
 const mostrarPersonaje = async (req, res) => {
     const { name } = req.params;
-    console.log(name)
     const personajes = await Peleadores.findOne({ where: { name } })
     try {
-        res.status(200).json(personajes)
+        res.status(200).json({ ...personajes, tags: JSON.parse(personajes.tags) })
     } catch (error) {
         res.status(404).json(error.message)
     }
