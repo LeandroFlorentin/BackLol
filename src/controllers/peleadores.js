@@ -6,14 +6,14 @@ const { Op } = require("sequelize")
 
 const mostrarPeleadores = async (req, res) => {
     let { pag, search, Tank, Mage, Assassin, Fighter, Marksman, Support } = req.query;
-    if (pag === undefined) pag = 1
-    if (search === undefined) search = null
-    if (Tank === undefined) Tank = null
-    if (Mage === undefined) Mage = null
-    if (Assassin === undefined) Assassin = null
-    if (Fighter === undefined) Fighter = null
-    if (Marksman === undefined) Marksman = null
-    if (Support === undefined) Support = null
+    if (pag === "undefined") pag = 1
+    if (search === "undefined") search = null
+    if (Tank === "undefined") Tank = null
+    if (Mage === "undefined") Mage = null
+    if (Assassin === "undefined") Assassin = null
+    if (Fighter === "undefined") Fighter = null
+    if (Marksman === "undefined") Marksman = null
+    if (Support === "undefined") Support = null
     try {
         if (
             pag === 1
